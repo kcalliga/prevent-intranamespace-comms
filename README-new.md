@@ -21,6 +21,7 @@ If your namespace/project already exists, follow the steps below.
 oc apply -f http-pod.yaml
 oc apply -f network-tool-pod.yaml
 
+##
 ### 2. Create Network Policies
 
 Next, create two network policies to control traffic between pods within the same namespace.
