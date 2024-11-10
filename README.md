@@ -24,5 +24,19 @@ httpd-7f98548fcf-msrr6           1/1     Running   0          11m   10.129.1.149
 
 network-tools-769ff557b7-2c4ll   1/1     Running   0          11m   10.129.1.150   home2   <none>           <none>
 
-In this example
+In this example, my http pod is on the 10.129.1.149 IP.
+
+4.  RSH into the network-tools-pod
+
+[keith@vpn-hopper all-in-one]$ oc rsh network-tools-769ff557b7-2c4ll
+
+sh-5.1$ curl http://10.129.1.149:8080
+
+The lack of response shows that it is timing out so there are no comms inside the same namespace/project.
+
+If you want to apply these same network policies on all new projects:
+
+1.  
+
+
 
