@@ -36,7 +36,9 @@ The lack of response shows that it is timing out so there are no comms inside th
 
 If you want to apply these same network policies on all new projects:
 
-1.  
+1.  oc apply -f bootstrap-project-template.yaml
+2.  oc apply -f project-config.yaml
+3.  Now create a new project/namespace and follow the steps from the first section again.
 
 
 
