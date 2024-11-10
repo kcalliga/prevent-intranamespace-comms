@@ -17,8 +17,11 @@ oc apply -f allow-from-ingress-network-policy.yaml
 3.  Get the IP address of the http pod
 
 [keith@vpn-hopper all-in-one]$ oc get po -o wide
+
 NAME                             READY   STATUS    RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
+
 httpd-7f98548fcf-msrr6           1/1     Running   0          11m   10.129.1.149   home2   <none>           <none>
+
 network-tools-769ff557b7-2c4ll   1/1     Running   0          11m   10.129.1.150   home2   <none>           <none>
 
 In this example
