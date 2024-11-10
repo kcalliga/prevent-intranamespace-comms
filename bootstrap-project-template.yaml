@@ -1,0 +1,68 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  creationTimestamp: "2024-11-09T16:47:02Z"
+  name: project-request
+  namespace: openshift-config
+  resourceVersion: "78412391"
+  uid: a815269e-9880-48c9-ae82-eebd4563eb3a
+objects:
+- apiVersion: project.openshift.io/v1
+  kind: Project
+  metadata:
+    annotations:
+      openshift.io/description: ${PROJECT_DESCRIPTION}
+      openshift.io/display-name: ${PROJECT_DISPLAYNAME}
+      openshift.io/requester: ${PROJECT_REQUESTING_USER}
+    creationTimestamp: null
+    name: ${PROJECT_NAME}
+  spec: {}
+  status: {}
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: null
+    name: admin
+    namespace: ${PROJECT_NAME}
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: ${PROJECT_ADMIN_USER}
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: allow-from-openshift-ingress
+  spec:
+    ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            network.openshift.io/policy-group: ingress
+    podSelector: {}
+    policyTypes:
+    - Ingress
+- apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: allow-from-kube-apiserver-operator
+  spec:
+    ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: openshift-kube-apiserver-operator
+        podSelector:
+          matchLabels:
+            app: kube-apiserver-operator
+    policyTypes:
+    - Ingress
+parameters:
+- name: PROJECT_NAME
+- name: PROJECT_DISPLAYNAME
+- name: PROJECT_DESCRIPTION
+- name: PROJECT_ADMIN_USER
+- name: PROJECT_REQUESTING_USER
