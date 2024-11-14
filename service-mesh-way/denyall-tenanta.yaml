@@ -1,10 +1,14 @@
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
 metadata:
-  name: default-deny-all
+  name: deny-tenanta-to-tenantb
   namespace: tenanta
 spec:
-  podSelector: {} # Select all pods in the namespace
-  policyTypes:
-  - Ingress
-  - Egress
+  selector:
+    matchLabels:
+      app: # Replace with the label that selects your application pods in tenanta
+  action: DENY
+  rules:
+  - to:
+    - operation:
+        namespaces: ["tenantb"]
