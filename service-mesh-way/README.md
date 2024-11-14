@@ -6,4 +6,6 @@ To do this through Openshift Service Mesh
 
 3.  Add tenanta and tenantb namespaces to SMMR (service mesh member roll)
 
-4.  Apply these two policies and do curl from network-tools pod in tenanta to httpd pod in tenantb or vice-versa
+4.  Apply the two denyall policies.  These are targeting pods with the app: httpd label.  These should be blocked.
+
+5.  Now apply the httpd-sidecar
