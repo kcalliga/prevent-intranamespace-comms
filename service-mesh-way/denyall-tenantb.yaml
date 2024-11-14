@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-tenantb-to-tenanta
+  namespace: tenantb
+spec:
+  selector:
+    matchLabels:
+      app: # Replace with the label that selects your application pods in tenantb
+  action: DENY
+  rules:
+  - to:
+    - operation:
+        namespaces: ["tenanta"]
