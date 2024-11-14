@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: # Replace with the label that selects your application pods in tenantb
+      app: httpd
   action: DENY
   rules:
   - to:
