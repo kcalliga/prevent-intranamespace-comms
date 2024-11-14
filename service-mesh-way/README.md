@@ -6,6 +6,6 @@ To do this through Openshift Service Mesh
 
 3.  Add tenanta and tenantb namespaces to SMMR (service mesh member roll)
 
-4.  Apply the two denyall policies.  These are targeting pods with the app: httpd label.  These should be blocked.
+4.  Apply the two denyall policies to tenanta and tenantb.  These are targeting pods with the app: httpd label.  These should be blocked with an rbac error.
 
-5.  Now apply the httpd-sidecar
+5.  Now apply the httpd-pod-sidecar-allowed pod to tenanta and tenantb namespace.  This has a different label and should be allowed.
