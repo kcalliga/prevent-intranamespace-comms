@@ -11,4 +11,5 @@ spec:
   rules:
   - to:
     - operation:
+        hosts: ["*"]
         namespaces: ["tenanta"]
